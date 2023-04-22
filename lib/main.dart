@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:padc_custom_components/custom_layouts/custom_layout.dart';
 import 'package:padc_custom_components/custom_painter/custom_painter_demo.dart';
+import 'package:padc_custom_components/resources/colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +27,24 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const CustomPainterDemo(),
+      // home: const CustomPainterDemo(),
+      home: const MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: FOOTBALL_PITCH_COLOR,
+      body: SafeArea(
+        child: Container(
+          child: CustomLayout(),
+        ),
+      ),
     );
   }
 }
