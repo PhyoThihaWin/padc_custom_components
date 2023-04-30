@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:padc_custom_components/assignment/home_page.dart';
 import 'package:padc_custom_components/custom_layouts/custom_layout.dart';
 import 'package:padc_custom_components/custom_painter/custom_painter_demo.dart';
 import 'package:padc_custom_components/resources/colors.dart';
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // home: const CustomPainterDemo(),
-      home: const MyHomePage(),
+      home: const HomePage(),
     );
   }
 }
