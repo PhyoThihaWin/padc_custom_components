@@ -6,7 +6,7 @@ import '../resources/strings.dart';
 import '../utils/constants.dart';
 
 class MyPatientsItemView extends StatelessWidget {
-  final bool isDetails;
+  final bool isDetail;
   final double padding;
   final double width;
   final Color color;
@@ -15,7 +15,7 @@ class MyPatientsItemView extends StatelessWidget {
 
   const MyPatientsItemView({
     Key? key,
-    this.isDetails = false,
+    this.isDetail = false,
     required this.borderRadius,
     required this.color,
     required this.width,
@@ -35,9 +35,12 @@ class MyPatientsItemView extends StatelessWidget {
         elevation: cardElevation,
         child: Row(
           children: [
-            Container(
-              width: MARGIN_MEDIUM,
-              color: Colors.blue,
+            Visibility(
+              visible: !isDetail,
+              child: Container(
+                width: MARGIN_MEDIUM,
+                color: Colors.blue,
+              ),
             ),
             Container(
               width: width,
@@ -48,26 +51,26 @@ class MyPatientsItemView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TitleView(
-                    isDetails: isDetails,
+                    isDetail: isDetail,
                   ),
                   const SizedBox(
                     height: MARGIN_MEDIUM,
                   ),
                   SubtitleView(
-                    isDetails: isDetails,
+                    isDetail: isDetail,
                     color: Colors.white70,
                   ),
                   const SizedBox(
                     height: MARGIN_MEDIUM,
                   ),
                   Visibility(
-                    visible: isDetails,
+                    visible: isDetail,
                     child: const DescriptionView(),
                   ),
                   const SizedBox(
                     height: MARGIN_MEDIUM,
                   ),
-                  PatientsAndCheckRowView(isDetails: isDetails)
+                  PatientsAndCheckRowView(isDetail: isDetail)
                 ],
               ),
             ),
@@ -81,10 +84,10 @@ class MyPatientsItemView extends StatelessWidget {
 class PatientsAndCheckRowView extends StatelessWidget {
   const PatientsAndCheckRowView({
     Key? key,
-    required this.isDetails,
+    required this.isDetail,
   }) : super(key: key);
 
-  final bool isDetails;
+  final bool isDetail;
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +110,7 @@ class PatientsAndCheckRowView extends StatelessWidget {
         ),
         const Spacer(),
         Visibility(
-          visible: !isDetails,
+          visible: !isDetail,
           child: const CheckIconView(),
         )
       ],
@@ -155,14 +158,14 @@ class DescriptionView extends StatelessWidget {
 }
 
 class TitleView extends StatelessWidget {
-  final bool isDetails;
+  final bool isDetail;
 
-  const TitleView({Key? key, required this.isDetails}) : super(key: key);
+  const TitleView({Key? key, required this.isDetail}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return isDetails
-        ? const OfficeNameAndTotalPatientsView()
+    return isDetail
+        ? OfficeNameAndTotalPatientsView(isDetail)
         : Text(
             HOME_PAGE_LIST_VIEW_TITLE_TEXT,
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
@@ -171,16 +174,16 @@ class TitleView extends StatelessWidget {
 }
 
 class SubtitleView extends StatelessWidget {
-  final bool isDetails;
+  final bool isDetail;
   final Color color;
 
   const SubtitleView(
-      {Key? key, required this.isDetails, this.color = Colors.white})
+      {Key? key, required this.isDetail, this.color = Colors.white})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return isDetails
+    return isDetail
         ? Text(
             DETAILS_PAGE_TEETH_DRILLING,
             style: TextStyle(
@@ -200,7 +203,11 @@ class SubtitleView extends StatelessWidget {
               ),
               Text(
                 TO_DO_DATETIME_TEXT,
-                style: TextStyle(color: color, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                  color: color,
+                  fontWeight: FontWeight.w500,
+                  fontSize: TEXT_SMALL,
+                ),
               ),
             ],
           );
@@ -208,29 +215,47 @@ class SubtitleView extends StatelessWidget {
 }
 
 class OfficeNameAndTotalPatientsView extends StatelessWidget {
-  const OfficeNameAndTotalPatientsView({
-    Key? key,
-  }) : super(key: key);
+  final bool isDetail;
+
+  OfficeNameAndTotalPatientsView(this.isDetail);
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Icon(
-          Icons.access_time,
-          color: Colors.black38,
-          size: MARGIN_MEDIUM_2,
-        ),
-        const SizedBox(
-          width: MARGIN_SMALL,
-        ),
-        Text(
-          "8:30 AM - 02:00 PM",
-          style: TextStyle(
+        Row(
+          children: [
+            const Icon(
+              Icons.access_time,
               color: Colors.black38,
-              fontSize: TEXT_REGULAR_2X,
-              fontWeight: FontWeight.w500),
+              size: MARGIN_MEDIUM_2,
+            ),
+            SizedBox(width: MARGIN_MEDIUM),
+            Text(
+              "8:30 AM - 02:00 PM",
+              style: TextStyle(
+                  color: Colors.black38,
+                  fontSize: TEXT_REGULAR,
+                  fontWeight: FontWeight.w500),
+            ),
+          ],
         ),
+        Visibility(
+          visible: isDetail,
+          child: Container(
+            padding: EdgeInsets.symmetric(
+                vertical: MARGIN_SMALL, horizontal: MARGIN_MEDIUM),
+            decoration: BoxDecoration(
+                color: Colors.green.shade50,
+                borderRadius: BorderRadius.circular(MARGIN_SMALL)),
+            child: Text(
+              "Confirmed",
+              style: TextStyle(color: Colors.green, fontSize: TEXT_XSMALL),
+            ),
+          ),
+        )
       ],
     );
   }

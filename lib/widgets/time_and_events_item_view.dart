@@ -14,7 +14,7 @@ class TimeAndEventsItemView extends StatelessWidget {
       required this.index})
       : super(key: key);
 
-  final List<List<String>> timeList;
+  final Map<String, String> timeList;
   final LayerLink layerLink;
   final int index;
 
@@ -47,7 +47,7 @@ class DateTimeDottedLineAndEventsCardView extends StatelessWidget {
     required this.timeList,
   }) : super(key: key);
 
-  final List<List<String>> timeList;
+  final Map<String, String> timeList;
   final LayerLink layerLink;
   final int index;
 
@@ -172,7 +172,7 @@ class EventsCardView extends StatelessWidget {
                   height: 5,
                 ),
                 SubtitleView(
-                  isDetails: false,
+                  isDetail: false,
                   color: (index == 0) ? Colors.black26 : Colors.grey,
                 )
               ],
@@ -229,7 +229,7 @@ class DateTimeView extends StatelessWidget {
   const DateTimeView({Key? key, required this.timeList, required this.index})
       : super(key: key);
 
-  final List<List<String>> timeList;
+  final Map<String, String> timeList;
   final int index;
 
   @override
@@ -243,11 +243,11 @@ class DateTimeView extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: [
           Text(
-            timeList[index][0],
+            timeList.keys.elementAt(index),
             style: TextStyle(fontWeight: FontWeight.w500),
           ),
           Text(
-            timeList[index][1],
+            timeList.values.elementAt(index),
             style: TextStyle(fontWeight: FontWeight.w500),
           ),
         ],

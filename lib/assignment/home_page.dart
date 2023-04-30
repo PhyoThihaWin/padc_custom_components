@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart' as myBadge;
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
+import 'package:padc_custom_components/assignment/detail_page.dart';
 import 'package:padc_custom_components/main.dart';
 import 'package:padc_custom_components/resources/colors.dart';
 import 'package:padc_custom_components/resources/dimens.dart';
@@ -17,18 +18,20 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final layerLink = LayerLink();
-    final List<List<String>> timeList = [
-      ["8:00", "8:30"],
-      ["9:00", "9:30"],
-      ["10:00", "10:30"],
-      ["11:00", "11:30"],
-      ["12:00", "12:30"],
-      ["13:00", "13:30"],
-      ["14:00", "14:30"],
-      ["15:00", "15:30"],
-      ["16:00", "16:30"],
-      ["17:00", "17:30"],
-    ];
+    final Map<String, String> timeList = {
+      "8:00": "8:30",
+      "9:00": "9:30",
+      "10:00": "10:30",
+      "11:00": "11:30",
+      "12:00": "12:30",
+      "13:00": "13:30",
+      "14:00": "14:30",
+      "15:00": "15:30",
+      "16:00": "16:30",
+      "17:00": "17:30",
+      "18:00": "18:30",
+      "19:00": "19:30",
+    };
 
     return Scaffold(
       body: Column(
@@ -143,7 +146,7 @@ class HomePage extends StatelessWidget {
   Future<dynamic> _navigateToDetailsScreen(BuildContext context) {
     return Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => MyHomePage(),
+        builder: (context) => DetailPage(),
       ),
     );
   }
@@ -316,7 +319,7 @@ class SearchFieldView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.lightBlueAccent.withOpacity(0.2),
+        color: Colors.white.withOpacity(0.2),
         borderRadius: BorderRadius.circular(MARGIN_XLARGE),
       ),
       child: TextField(
